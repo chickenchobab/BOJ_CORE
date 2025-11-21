@@ -6,7 +6,7 @@ using namespace std;
 
 int n, m;
 vector<int> graph[501];
-bool bVisited[501];
+bool isVisited[501];
 int numCase;
 
 void reset()
@@ -14,19 +14,19 @@ void reset()
   for (int i = 1; i <= n; ++i)
   {
     graph[i].clear();
-    bVisited[i] = 0;
+    isVisited[i] = 0;
   }
   ++numCase;
 }
 
 bool dfs(int cur, int prv)
 {
-  bVisited[cur] = 1;
+  isVisited[cur] = 1;
 
   for (int nxt : graph[cur])
   {
     if (nxt == prv) continue;
-    if (bVisited[nxt]) return false;
+    if (isVisited[nxt]) return false;
     if (!dfs(nxt, cur)) return false;
   }
 
@@ -72,7 +72,7 @@ int main()
 
     for (int i = 1; i <= n; ++i)
     {
-      if (bVisited[i]) continue;
+      if (isVisited[i]) continue;
 
       numTree += dfs(i, 0);
     }
